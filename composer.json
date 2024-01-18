@@ -13,7 +13,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/annotations": "^1.2",
-        "doctrine/cache": "^1.0",
+        "doctrine/cache": "^1.11 || ^2.0",
         "greg0ire/enum": "^2.1 || ^3.0 || ^4.0",
         "guzzlehttp/guzzle": "^6.5",
         "paragonie/random_compat": "^2.0",
