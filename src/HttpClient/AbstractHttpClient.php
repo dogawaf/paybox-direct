@@ -124,7 +124,7 @@ abstract class AbstractHttpClient
         $results = [];
         foreach (explode('&', $response) as $element) {
             list($key, $value) = explode('=', $element);
-            $value = utf8_encode(trim($value));
+            $value = $this->utf8_encode(trim($value));
             $results[$key] = $value;
         }
 
@@ -138,6 +138,19 @@ abstract class AbstractHttpClient
         }
 
         return $response;
+    }
+
+    protected function utf8_encode(string $value): string
+    {
+        if (extension_loaded('mbstring')) {
+            return mb_convert_encoding($value, 'UTF-8', 'ISO-8859-1');
+        }
+        if (extension_loaded('iconv')) {
+            return iconv('ISO-8859-1', 'UTF-8', $value);
+        }
+
+        // @deprecated utf8_encode since PHP 8.2
+        return utf8_encode($value);
     }
 
     /**
